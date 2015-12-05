@@ -10,17 +10,17 @@ using ComicCreator.API.Models;
 
 namespace ComicCreator.API.Controllers
 {
-    public class TileMVCController : Controller
+    public class TilesMVCController : Controller
     {
         private ComicCreatorDB db = new ComicCreatorDB();
 
-        // GET: TileMVC
+        // GET: TilesMVC
         public ActionResult Index()
         {
             return View(db.Tiles.ToList());
         }
 
-        // GET: TileMVC/Details/5
+        // GET: TilesMVC/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,18 +35,18 @@ namespace ComicCreator.API.Controllers
             return View(tile);
         }
 
-        // GET: TileMVC/Create
+        // GET: TilesMVC/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: TileMVC/Create
+        // POST: TilesMVC/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TileId,DateCreated,DateUpdated,OrderNumber")] Tile tile)
+        public ActionResult Create([Bind(Include = "TileId,Caption,URL,DateCreated,DateUpdated,OrderNumber")] Tile tile)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace ComicCreator.API.Controllers
             return View(tile);
         }
 
-        // GET: TileMVC/Edit/5
+        // GET: TilesMVC/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,12 +73,12 @@ namespace ComicCreator.API.Controllers
             return View(tile);
         }
 
-        // POST: TileMVC/Edit/5
+        // POST: TilesMVC/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TileId,DateCreated,DateUpdated,OrderNumber")] Tile tile)
+        public ActionResult Edit([Bind(Include = "TileId,Caption,URL,DateCreated,DateUpdated,OrderNumber")] Tile tile)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace ComicCreator.API.Controllers
             return View(tile);
         }
 
-        // GET: TileMVC/Delete/5
+        // GET: TilesMVC/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +104,7 @@ namespace ComicCreator.API.Controllers
             return View(tile);
         }
 
-        // POST: TileMVC/Delete/5
+        // POST: TilesMVC/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

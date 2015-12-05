@@ -2,117 +2,103 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.Mvc;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Description;
 using ComicCreator.API.Models;
 
 namespace ComicCreator.API.Controllers
 {
-    public class ProjectsController : Controller
+    public class ProjectsController : ApiController
     {
         private ComicCreatorDB db = new ComicCreatorDB();
 
-        // GET: Projects1
-        public ActionResult Index()
+        // GET: api/Projects
+        public IQueryable<Project> GetProjects()
         {
-            return View(db.Projects.ToList());
+            return db.Projects;
         }
 
-        // GET: Projects1/Details/5
-        public ActionResult Details(int? id)
+        // GET: api/Projects/5
+        [ResponseType(typeof(Project))]
+        public IHttpActionResult GetProject(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Project project = db.Projects.Find(id);
             if (project == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(project);
+
+            return Ok(project);
         }
 
-        // GET: Projects1/Create
-        public ActionResult Create()
+        // PUT: api/Projects/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutProject(int id, Project project)
         {
-            return View();
-        }
-
-        // POST: Projects1/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProjectId,Title,Author,DateCreated,DateUpdated")] Project project)
-        {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Projects.Add(project);
+                return BadRequest(ModelState);
+            }
+
+            if (id != project.ProjectId)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(project).State = EntityState.Modified;
+
+            try
+            {
                 db.SaveChanges();
-                return RedirectToAction("Index");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProjectExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
-            return View(project);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: Projects1/Edit/5
-        public ActionResult Edit(int? id)
+        // POST: api/Projects
+        [ResponseType(typeof(Project))]
+        public IHttpActionResult PostProject(Project project)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return BadRequest(ModelState);
             }
+
+            db.Projects.Add(project);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = project.ProjectId }, project);
+        }
+
+        // DELETE: api/Projects/5
+        [ResponseType(typeof(Project))]
+        public IHttpActionResult DeleteProject(int id)
+        {
             Project project = db.Projects.Find(id);
             if (project == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(project);
-        }
 
-        // POST: Projects1/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProjectId,Title,Author,DateCreated,DateUpdated")] Project project)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(project).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(project);
-        }
-
-        // GET: Projects1/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Project project = db.Projects.Find(id);
-            if (project == null)
-            {
-                return HttpNotFound();
-            }
-            return View(project);
-        }
-
-        // POST: Projects1/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Project project = db.Projects.Find(id);
             db.Projects.Remove(project);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return Ok(project);
         }
 
         protected override void Dispose(bool disposing)
@@ -122,6 +108,11 @@ namespace ComicCreator.API.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool ProjectExists(int id)
+        {
+            return db.Projects.Count(e => e.ProjectId == id) > 0;
         }
     }
 }

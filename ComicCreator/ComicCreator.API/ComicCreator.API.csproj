@@ -176,9 +176,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\ProjectsMVCController.cs" />
-    <Compile Include="Controllers\TileMVCController.cs" />
     <Compile Include="Controllers\TilesController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\TilesMVCController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -257,21 +256,11 @@
     <Content Include="Views\ProjectsMVC\Details.cshtml" />
     <Content Include="Views\ProjectsMVC\Edit.cshtml" />
     <Content Include="Views\ProjectsMVC\Index.cshtml" />
-    <Content Include="Views\TileMVC\Create.cshtml" />
-    <Content Include="Views\TileMVC\Delete.cshtml" />
-    <Content Include="Views\TileMVC\Details.cshtml" />
-    <Content Include="Views\TileMVC\Edit.cshtml" />
-    <Content Include="Views\TileMVC\Index.cshtml" />
-    <Content Include="Views\Projects1\Create.cshtml" />
-    <Content Include="Views\Projects1\Delete.cshtml" />
-    <Content Include="Views\Projects1\Details.cshtml" />
-    <Content Include="Views\Projects1\Edit.cshtml" />
-    <Content Include="Views\Projects1\Index.cshtml" />
-    <Content Include="Views\Tiles1\Create.cshtml" />
-    <Content Include="Views\Tiles1\Delete.cshtml" />
-    <Content Include="Views\Tiles1\Details.cshtml" />
-    <Content Include="Views\Tiles1\Edit.cshtml" />
-    <Content Include="Views\Tiles1\Index.cshtml" />
+    <Content Include="Views\TilesMVC\Create.cshtml" />
+    <Content Include="Views\TilesMVC\Delete.cshtml" />
+    <Content Include="Views\TilesMVC\Details.cshtml" />
+    <Content Include="Views\TilesMVC\Edit.cshtml" />
+    <Content Include="Views\TilesMVC\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201512050419045_Initial-Create.resx">
