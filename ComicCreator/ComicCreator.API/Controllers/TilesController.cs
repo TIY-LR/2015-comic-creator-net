@@ -87,6 +87,8 @@ namespace ComicCreator.API.Controllers
                 return BadRequest(ModelState);
             }
 
+             tile.DateUpdated = DateTime.Now;
+             tile.DateCreated = DateTime.Now;
             db.Tiles.Add(tile);
             db.SaveChanges();
 

@@ -38,6 +38,7 @@ namespace ComicCreator.API.Controllers
         // GET: TilesMVC/Create
         public ActionResult Create()
         {
+            ViewBag.Projects = new SelectList(db.Projects.ToList(), "ProjectId", "Title");
             return View();
         }
 
@@ -46,10 +47,14 @@ namespace ComicCreator.API.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TileId,Caption,URL,DateCreated,DateUpdated,OrderNumber")] Tile tile)
+        public ActionResult Create([Bind(Include = "TileId,Caption,URL,OrderNumber")] Tile tile, int projectid)
         {
             if (ModelState.IsValid)
             {
+                var proj = db.Projects.Find(projectid);
+                tile.Project = proj;
+                tile.DateCreated = DateTime.Now;
+                tile.DateUpdated = DateTime.Now;
                 db.Tiles.Add(tile);
                 db.SaveChanges();
                 return RedirectToAction("Index");

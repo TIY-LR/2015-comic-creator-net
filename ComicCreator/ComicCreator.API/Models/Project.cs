@@ -14,7 +14,7 @@ namespace ComicCreator.API.Models
         public string Category { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
-        public List<Tile> tiles {get; set;}
+        public virtual ICollection<Tile> tiles {get; set;}
     }
     public class Tile
     {

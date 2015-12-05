@@ -26,7 +26,7 @@ namespace ComicCreator.API.Controllers
         [ResponseType(typeof(Project))]
         public IHttpActionResult GetProject(int id)
         {
-            Project project = db.Projects.Find(id);
+            Project project = db.Projects.Include("Tiles").Where(x => x.ProjectId == id).First(); 
             if (project == null)
             {
                 return NotFound();
@@ -81,6 +81,8 @@ namespace ComicCreator.API.Controllers
 
             project.DateCreated = DateTime.Now;
             project.DateUpdated = DateTime.Now;
+
+        
 
             db.Projects.Add(project);
 
