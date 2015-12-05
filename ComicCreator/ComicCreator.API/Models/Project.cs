@@ -9,6 +9,7 @@ namespace ComicCreator.API.Models
     {
         public int ProjectId { get; set; }
         public string Title { get; set; }
+        public string  Author { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
         public List<Tile> tiles {get; set;}
@@ -22,5 +23,9 @@ namespace ComicCreator.API.Models
         public DateTime DateUpdated { get; set; }
         public Project Project { get; set; }
         public int OrderNumber { get; set; }
+    }
+    public class NewProject
+    {
+
     }
 }

@@ -19,6 +19,10 @@ namespace ComicCreator.API.Models
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ComicCreatorDB, Configuration>());
         }
 
+        public System.Data.Entity.DbSet<ComicCreator.API.Models.Project> Projects { get; set; }
+
+        public System.Data.Entity.DbSet<ComicCreator.API.Models.Tile> Tiles { get; set; }
+
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
