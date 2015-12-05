@@ -202,6 +202,10 @@
     <Compile Include="Migrations\201512051735126_TileAddCaptionAddURL.Designer.cs">
       <DependentUpon>201512051735126_TileAddCaptionAddURL.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512052230219_AddCategoryandCover.cs" />
+    <Compile Include="Migrations\201512052230219_AddCategoryandCover.Designer.cs">
+      <DependentUpon>201512052230219_AddCategoryandCover.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ComicCreatorDB.cs" />
     <Compile Include="Models\Project.cs" />
@@ -279,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512051735126_TileAddCaptionAddURL.resx">
       <DependentUpon>201512051735126_TileAddCaptionAddURL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512052230219_AddCategoryandCover.resx">
+      <DependentUpon>201512052230219_AddCategoryandCover.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

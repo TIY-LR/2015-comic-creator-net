@@ -10,6 +10,8 @@ namespace ComicCreator.API.Models
         public int ProjectId { get; set; }
         public string Title { get; set; }
         public string  Author { get; set; }
+        public string Cover { get; set; }
+        public string Category { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
         public List<Tile> tiles {get; set;}
