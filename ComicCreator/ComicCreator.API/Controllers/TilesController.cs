@@ -22,6 +22,14 @@ namespace ComicCreator.API.Controllers
             return db.Tiles;
         }
 
+        // GET: api/Tiles
+        [HttpGet]
+        [Route("api/tiles/{projectId}")]
+        public IQueryable<Tile> GetTiles(int projectId)
+        {
+            return db.Tiles.Where(t=> t.Project.ProjectId== projectId);
+        }
+
         // GET: api/Tiles/5
         [ResponseType(typeof(Tile))]
         public IHttpActionResult GetTile(int id)
