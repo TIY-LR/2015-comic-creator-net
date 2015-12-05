@@ -79,7 +79,11 @@ namespace ComicCreator.API.Controllers
                 return BadRequest(ModelState);
             }
 
+            project.DateCreated = DateTime.Now;
+            project.DateUpdated = DateTime.Now;
+
             db.Projects.Add(project);
+
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = project.ProjectId }, project);
