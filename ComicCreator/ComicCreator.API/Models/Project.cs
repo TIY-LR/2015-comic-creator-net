@@ -17,6 +17,8 @@ namespace ComicCreator.API.Models
     public class Tile
     {
         public int TileId { get; set; }
+        public string Caption { get; set; }
+        public string URL { get; set; }
         public float PositionX = 0.0f;
         public float PositionY = 0.0f;
         public DateTime DateCreated { get; set; }
@@ -24,8 +26,5 @@ namespace ComicCreator.API.Models
         public Project Project { get; set; }
         public int OrderNumber { get; set; }
     }
-    public class NewProject
-    {
 
-    }
 }

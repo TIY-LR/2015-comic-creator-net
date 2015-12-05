@@ -2,103 +2,117 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
+using System.Web;
+using System.Web.Mvc;
 using ComicCreator.API.Models;
 
 namespace ComicCreator.API.Controllers
 {
-    public class TilesController : ApiController
+    public class TilesController : Controller
     {
         private ComicCreatorDB db = new ComicCreatorDB();
 
-        // GET: api/Tiles
-        public IQueryable<Tile> GetTiles()
+        // GET: Tiles1
+        public ActionResult Index()
         {
-            return db.Tiles;
+            return View(db.Tiles.ToList());
         }
 
-        // GET: api/Tiles/5
-        [ResponseType(typeof(Tile))]
-        public IHttpActionResult GetTile(int id)
+        // GET: Tiles1/Details/5
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Tile tile = db.Tiles.Find(id);
             if (tile == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
-
-            return Ok(tile);
+            return View(tile);
         }
 
-        // PUT: api/Tiles/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutTile(int id, Tile tile)
+        // GET: Tiles1/Create
+        public ActionResult Create()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            return View();
+        }
 
-            if (id != tile.TileId)
+        // POST: Tiles1/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "TileId,Caption,URL,DateCreated,DateUpdated,OrderNumber")] Tile tile)
+        {
+            if (ModelState.IsValid)
             {
-                return BadRequest();
-            }
-
-            db.Entry(tile).State = EntityState.Modified;
-
-            try
-            {
+                db.Tiles.Add(tile);
                 db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TileExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToAction("Index");
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return View(tile);
         }
 
-        // POST: api/Tiles
-        [ResponseType(typeof(Tile))]
-        public IHttpActionResult PostTile(Tile tile)
+        // GET: Tiles1/Edit/5
+        public ActionResult Edit(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return BadRequest(ModelState);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            db.Tiles.Add(tile);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = tile.TileId }, tile);
-        }
-
-        // DELETE: api/Tiles/5
-        [ResponseType(typeof(Tile))]
-        public IHttpActionResult DeleteTile(int id)
-        {
             Tile tile = db.Tiles.Find(id);
             if (tile == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
+            return View(tile);
+        }
 
+        // POST: Tiles1/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "TileId,Caption,URL,DateCreated,DateUpdated,OrderNumber")] Tile tile)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(tile).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(tile);
+        }
+
+        // GET: Tiles1/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Tile tile = db.Tiles.Find(id);
+            if (tile == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tile);
+        }
+
+        // POST: Tiles1/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Tile tile = db.Tiles.Find(id);
             db.Tiles.Remove(tile);
             db.SaveChanges();
-
-            return Ok(tile);
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -108,11 +122,6 @@ namespace ComicCreator.API.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool TileExists(int id)
-        {
-            return db.Tiles.Count(e => e.TileId == id) > 0;
         }
     }
 }

@@ -194,6 +194,10 @@
     <Compile Include="Migrations\201512051704524_ProjectAddedAuthor.Designer.cs">
       <DependentUpon>201512051704524_ProjectAddedAuthor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512051735126_TileAddCaptionAddURL.cs" />
+    <Compile Include="Migrations\201512051735126_TileAddCaptionAddURL.Designer.cs">
+      <DependentUpon>201512051735126_TileAddCaptionAddURL.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ComicCreatorDB.cs" />
     <Compile Include="Models\Project.cs" />
@@ -258,6 +262,16 @@
     <Content Include="Views\TileMVC\Details.cshtml" />
     <Content Include="Views\TileMVC\Edit.cshtml" />
     <Content Include="Views\TileMVC\Index.cshtml" />
+    <Content Include="Views\Projects1\Create.cshtml" />
+    <Content Include="Views\Projects1\Delete.cshtml" />
+    <Content Include="Views\Projects1\Details.cshtml" />
+    <Content Include="Views\Projects1\Edit.cshtml" />
+    <Content Include="Views\Projects1\Index.cshtml" />
+    <Content Include="Views\Tiles1\Create.cshtml" />
+    <Content Include="Views\Tiles1\Delete.cshtml" />
+    <Content Include="Views\Tiles1\Details.cshtml" />
+    <Content Include="Views\Tiles1\Edit.cshtml" />
+    <Content Include="Views\Tiles1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201512050419045_Initial-Create.resx">
@@ -268,6 +282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512051704524_ProjectAddedAuthor.resx">
       <DependentUpon>201512051704524_ProjectAddedAuthor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512051735126_TileAddCaptionAddURL.resx">
+      <DependentUpon>201512051735126_TileAddCaptionAddURL.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

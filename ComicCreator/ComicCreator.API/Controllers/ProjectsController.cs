@@ -2,107 +2,117 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
+using System.Web;
+using System.Web.Mvc;
 using ComicCreator.API.Models;
 
 namespace ComicCreator.API.Controllers
 {
-    public class ProjectsController : ApiController
+    public class ProjectsController : Controller
     {
         private ComicCreatorDB db = new ComicCreatorDB();
 
-        // GET: api/Projects
-        public IQueryable<Project> GetProjects()
+        // GET: Projects1
+        public ActionResult Index()
         {
-            return db.Projects;
+            return View(db.Projects.ToList());
         }
 
-        // GET: api/Projects/5
-        [ResponseType(typeof(Project))]
-        public IHttpActionResult GetProject(int id)
+        // GET: Projects1/Details/5
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Project project = db.Projects.Find(id);
             if (project == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
-
-            return Ok(project);
+            return View(project);
         }
 
-        // PUT: api/Projects/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutProject(int id, Project project)
+        // GET: Projects1/Create
+        public ActionResult Create()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            return View();
+        }
 
-            if (id != project.ProjectId)
+        // POST: Projects1/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ProjectId,Title,Author,DateCreated,DateUpdated")] Project project)
+        {
+            if (ModelState.IsValid)
             {
-                return BadRequest();
-            }
-
-            db.Entry(project).State = EntityState.Modified;
-
-            try
-            {
+                db.Projects.Add(project);
                 db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProjectExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToAction("Index");
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return View(project);
         }
 
-        // POST: api/Projects
-        [ResponseType(typeof(Project))]
-        public IHttpActionResult PostProject(Project project)
+        // GET: Projects1/Edit/5
+        public ActionResult Edit(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return BadRequest(ModelState);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //var project= new Project()
-            //{
-
-            //}
-
-            db.Projects.Add(project);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = project.ProjectId }, project);
-        }
-
-        // DELETE: api/Projects/5
-        [ResponseType(typeof(Project))]
-        public IHttpActionResult DeleteProject(int id)
-        {
             Project project = db.Projects.Find(id);
             if (project == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
+            return View(project);
+        }
 
+        // POST: Projects1/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ProjectId,Title,Author,DateCreated,DateUpdated")] Project project)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(project).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(project);
+        }
+
+        // GET: Projects1/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Project project = db.Projects.Find(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project);
+        }
+
+        // POST: Projects1/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Project project = db.Projects.Find(id);
             db.Projects.Remove(project);
             db.SaveChanges();
-
-            return Ok(project);
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -112,11 +122,6 @@ namespace ComicCreator.API.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool ProjectExists(int id)
-        {
-            return db.Projects.Count(e => e.ProjectId == id) > 0;
         }
     }
 }
