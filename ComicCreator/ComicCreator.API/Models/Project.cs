@@ -14,12 +14,12 @@ namespace ComicCreator.API.Models
         }
         public int Id { get; set; }
         public string Title { get; set; }
-        public string  Author { get; set; }
+        public string Author { get; set; }
         public string Cover { get; set; }
         public string Category { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
-        public virtual ICollection<Tile> tiles {get; set;}
+        public virtual ICollection<Tile> tiles { get; set; }
     }
     public class Tile
     {
@@ -37,9 +37,21 @@ namespace ComicCreator.API.Models
     [JsonObject("Project")]
     public class GetProjectInfoVM
     {
+        public GetProjectInfoVM(Project p)
+        {
+            Id = p.Id;
+            Author = p.Author;
+            Category = p.Category;
+            Cover = p.Cover;
+            DateCreated = p.DateCreated;
+            DateUpdated = p.DateUpdated;
+            tiles = p.tiles.Select(x => x.Id).ToList();
+        }
         public GetProjectInfoVM()
         {
             tiles = new List<int>();
+
+
         }
         public int Id { get; set; }
         public string Title { get; set; }

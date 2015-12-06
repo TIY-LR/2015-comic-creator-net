@@ -19,7 +19,9 @@ namespace ComicCreator.API.Controllers
         // GET: api/Projects
         public IHttpActionResult GetProjects()
         {
-            return Ok(db.Projects.ToList());
+            var model = db.Projects.Include("tiles").ToList().Select( p=> new GetProjectInfoVM(p)); 
+            
+            return Ok(model);
         }
 
         // GET: api/Projects/5
@@ -32,17 +34,7 @@ namespace ComicCreator.API.Controllers
                 return NotFound();
             }
 
-            var model = new GetProjectInfoVM()
-            {
-                Id = project.Id,
-                Author = project.Author,
-                Category = project.Category,
-                Cover = project.Cover,
-                DateCreated = project.DateCreated,
-                DateUpdated = project.DateUpdated,
-                tiles = project.tiles.Select(x => x.Id).ToList()
-
-            };
+            var model = new GetProjectInfoVM(project);
             return Ok(model);
         }
 
