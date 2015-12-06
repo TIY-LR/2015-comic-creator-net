@@ -7,6 +7,10 @@ namespace ComicCreator.API.Models
 {
     public class Project
     {
+        public Project()
+        {
+            tiles = new List<Tile>();
+        }
         public int ProjectId { get; set; }
         public string Title { get; set; }
         public string  Author { get; set; }
