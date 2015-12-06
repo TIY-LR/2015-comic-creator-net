@@ -22,13 +22,13 @@ namespace ComicCreator.API.Controllers
             return Ok(db.Tiles.ToList());
         }
 
-            //// GET: api/Tiles
-            //[HttpGet]
-            //[Route("api/tiles/{projectId}")]
-            //public IQueryable<Tile> GetTiles(int projectId)
-            //{
-            //    return db.Tiles.Where(t=> t.Project.Id== projectId);
-            //}
+        //// GET: api/Tiles
+        //[HttpGet]
+        //[Route("api/tiles/{projectId}")]
+        //public IQueryable<Tile> GetTiles(int projectId)
+        //{
+        //    return db.Tiles.Where(t=> t.Project.Id== projectId);
+        //}
 
         // GET: api/Tiles/5
         [ResponseType(typeof(Tile))]
@@ -80,19 +80,34 @@ namespace ComicCreator.API.Controllers
 
         // POST: api/Tiles
         [ResponseType(typeof(Tile))]
-        public IHttpActionResult PostTile(Tile tile)
+        public IHttpActionResult PostTile(CreateTitleVM model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-             tile.DateUpdated = DateTime.Now;
-             tile.DateCreated = DateTime.Now;
-            db.Tiles.Add(tile);
+            var project = db.Projects.Find(model.Project);
+            if (project == null)
+            {
+                return BadRequest($"Unable to find project with id {model.Project}");
+            }
+
+            var newTile = new Tile()
+            {
+                DateUpdated = DateTime.Now,
+                DateCreated = DateTime.Now,
+                OrderNumber = model.OrderNumber,
+                Project = project,
+                URL = model.URL,
+                Caption = model.Caption
+
+            };
+
+            db.Tiles.Add(newTile);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = tile.Id }, tile);
+            return CreatedAtRoute("DefaultApi", new { id = newTile.Id }, newTile);
         }
 
         // DELETE: api/Tiles/5
