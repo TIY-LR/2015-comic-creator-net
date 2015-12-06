@@ -47,10 +47,13 @@ namespace ComicCreator.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != project.Id)
-            {
-                return BadRequest();
-            }
+            //if (id != project.Id)
+            //{
+            //    return BadRequest();
+            //}
+
+            project.DateCreated = DateTime.Now;
+            project.DateUpdated = DateTime.Now;
 
             db.Entry(project).State = EntityState.Modified;
 

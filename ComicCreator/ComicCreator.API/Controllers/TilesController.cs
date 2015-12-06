@@ -53,10 +53,8 @@ namespace ComicCreator.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != tile.Id)
-            {
-                return BadRequest();
-            }
+            tile.DateCreated = DateTime.Now;
+            tile.DateUpdated = DateTime.Now;
 
             db.Entry(tile).State = EntityState.Modified;
 
