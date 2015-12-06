@@ -34,7 +34,7 @@ namespace ComicCreator.API.Models
         public int OrderNumber { get; set; }
     }
 
-    [JsonObject("Project")]
+    [JsonObject(Title = "Project")]
     public class GetProjectInfoVM
     {
         public GetProjectInfoVM(Project p)
