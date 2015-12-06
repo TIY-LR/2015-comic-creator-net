@@ -76,16 +76,20 @@ namespace ComicCreator.API.Models
             DateCreated = p.DateCreated;
             DateUpdated = p.DateUpdated;
             OrderNumber = p.OrderNumber;
-            Project = p.project.Select(x => x.Id);
+            Project = p.Project.Id;
         }
 
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public string Cover { get; set; }
-        public string Category { get; set; }
+        public string Caption { get; set; }
+        public string URL { get; set; }
+        public float PositionX { get; set; }
+        public float PositionY { get; set; }
+        public int OrderNumber
+        {
+            get; set;
+        }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
-        public virtual int Project { get; set; }
+        public int Project { get; set; }
     }
 }
