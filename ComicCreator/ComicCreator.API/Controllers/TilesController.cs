@@ -19,7 +19,7 @@ namespace ComicCreator.API.Controllers
         // GET: api/Tiles
         public IHttpActionResult GetTiles()
         {
-            return Ok(db.Tiles.ToList());
+            return Ok(db.Tiles.Include("project").ToList());
         }
 
         //// GET: api/Tiles
@@ -34,7 +34,7 @@ namespace ComicCreator.API.Controllers
         [ResponseType(typeof(Tile))]
         public IHttpActionResult GetTile(int id)
         {
-            Tile tile = db.Tiles.Find(id);
+            Tile tile = db.Tiles.Include("project").Find(id);
             if (tile == null)
             {
                 return NotFound();
