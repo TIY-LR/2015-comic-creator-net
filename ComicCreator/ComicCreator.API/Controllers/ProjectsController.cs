@@ -26,7 +26,7 @@ namespace ComicCreator.API.Controllers
         [ResponseType(typeof(Project))]
         public IHttpActionResult GetProject(int id)
         {
-            Project project = db.Projects.Include("Tiles").Where(x => x.ProjectId == id).First(); 
+            Project project = db.Projects.Include("Tiles").Where(x => x.ProjectId == id).FirstOrDefault(); 
             if (project == null)
             {
                 return NotFound();
