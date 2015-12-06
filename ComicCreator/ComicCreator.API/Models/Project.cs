@@ -45,6 +45,7 @@ namespace ComicCreator.API.Models
             Id = p.Id;
             Author = p.Author;
             Category = p.Category;
+            Title = p.Title;
             Cover = p.Cover;
             DateCreated = p.DateCreated;
             DateUpdated = p.DateUpdated;
