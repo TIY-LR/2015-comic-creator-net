@@ -19,8 +19,8 @@ namespace ComicCreator.API.Controllers
         // GET: api/Projects
         public IHttpActionResult GetProjects()
         {
-            var model = db.Projects.Include("tiles").ToList().Select( p=> new GetProjectInfoVM(p)); 
-            
+            var model = db.Projects.Include("tiles").ToList().Select(p => new GetProjectInfoVM(p));
+
             return Ok(model);
         }
 
@@ -28,7 +28,7 @@ namespace ComicCreator.API.Controllers
         [ResponseType(typeof(Project))]
         public IHttpActionResult GetProject(int id)
         {
-            Project project = db.Projects.Include("Tiles").Where(x => x.Id == id).FirstOrDefault(); 
+            Project project = db.Projects.Include("Tiles").Where(x => x.Id == id).FirstOrDefault();
             if (project == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace ComicCreator.API.Controllers
             project.DateCreated = DateTime.Now;
             project.DateUpdated = DateTime.Now;
 
-        
+
 
             db.Projects.Add(project);
 
@@ -98,19 +98,18 @@ namespace ComicCreator.API.Controllers
         }
 
         // DELETE: api/Projects/5
-        [ResponseType(typeof(Project))]
-        public IHttpActionResult DeleteProject(int id)
+        public void DeleteProject(int id)
         {
             Project project = db.Projects.Find(id);
             if (project == null)
             {
-                return NotFound();
+                return;
             }
 
             db.Projects.Remove(project);
             db.SaveChanges();
 
-            return Ok(project);
+            return;
         }
 
         protected override void Dispose(bool disposing)

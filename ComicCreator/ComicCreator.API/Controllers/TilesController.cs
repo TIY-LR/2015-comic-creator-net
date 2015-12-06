@@ -19,7 +19,7 @@ namespace ComicCreator.API.Controllers
         // GET: api/Tiles
         public IHttpActionResult GetTiles()
         {
-            return Ok(db.Tiles.Include("Project").Select( t=> new GetTileInfoVM(t)));
+            return Ok(db.Tiles.Include("Project").Select(t => new GetTileInfoVM(t)));
         }
 
         //// GET: api/Tiles
@@ -110,19 +110,18 @@ namespace ComicCreator.API.Controllers
         }
 
         // DELETE: api/Tiles/5
-        [ResponseType(typeof(Tile))]
-        public IHttpActionResult DeleteTile(int id)
+        public void DeleteTile(int id)
         {
             Tile tile = db.Tiles.Find(id);
             if (tile == null)
             {
-                return NotFound();
+                return;
             }
 
             db.Tiles.Remove(tile);
             db.SaveChanges();
 
-            return Ok(tile);
+            return;
         }
 
         protected override void Dispose(bool disposing)
