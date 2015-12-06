@@ -19,7 +19,7 @@ namespace ComicCreator.API.Controllers
         // GET: api/Tiles
         public IHttpActionResult GetTiles()
         {
-            return Ok(db.Tiles.Include("project").ToList());
+            return Ok(db.Tiles.Include("project").Select( t=> new GetTileInfoVM(t));
         }
 
         //// GET: api/Tiles
@@ -40,7 +40,8 @@ namespace ComicCreator.API.Controllers
                 return NotFound();
             }
 
-            return Ok(tile);
+            var model = new GetTileInfoVM(tile);
+            return Ok(model);
         }
 
         // PUT: api/Tiles/5
