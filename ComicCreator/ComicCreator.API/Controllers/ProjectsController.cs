@@ -17,9 +17,9 @@ namespace ComicCreator.API.Controllers
         private ComicCreatorDB db = new ComicCreatorDB();
 
         // GET: api/Projects
-        public IQueryable<Project> GetProjects()
+        public IHttpActionResult GetProjects()
         {
-            return db.Projects;
+            return Ok(db.Projects.ToList());
         }
 
         // GET: api/Projects/5
