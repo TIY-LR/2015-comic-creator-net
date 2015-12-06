@@ -16,7 +16,7 @@ namespace ComicCreator.API.Models
         public ComicCreatorDB()
             : base("name=ComicCreatorDB")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ComicCreatorDB, Configuration>());
+           // Database.SetInitializer(new MigrateDatabaseToLatestVersion<ComicCreatorDB, Configuration>());
         }
 
         public System.Data.Entity.DbSet<ComicCreator.API.Models.Project> Projects { get; set; }
