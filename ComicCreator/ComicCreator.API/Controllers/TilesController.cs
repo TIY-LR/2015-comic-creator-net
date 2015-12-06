@@ -34,7 +34,7 @@ namespace ComicCreator.API.Controllers
         [ResponseType(typeof(Tile))]
         public IHttpActionResult GetTile(int id)
         {
-            Tile tile = db.Tiles.Include("project").Find(id);
+            Tile tile = db.Tiles.Find(id);
             if (tile == null)
             {
                 return NotFound();

@@ -30,7 +30,7 @@ namespace ComicCreator.API.Models
         public float PositionY = 0.0f;
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
-        public Project Project { get; set; }
+        public virtual Project Project { get; set; }
         public int OrderNumber { get; set; }
     }
 
