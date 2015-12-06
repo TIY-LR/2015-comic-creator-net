@@ -3,7 +3,7 @@ namespace ComicCreator.API.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class NewProject : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -11,33 +11,38 @@ namespace ComicCreator.API.Migrations
                 "dbo.Projects",
                 c => new
                     {
-                        ProjectId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         Title = c.String(),
+                        Author = c.String(),
+                        Cover = c.String(),
+                        Category = c.String(),
                         DateCreated = c.DateTime(nullable: false),
                         DateUpdated = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.ProjectId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Tiles",
                 c => new
                     {
-                        TileId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
+                        Caption = c.String(),
+                        URL = c.String(),
                         DateCreated = c.DateTime(nullable: false),
                         DateUpdated = c.DateTime(nullable: false),
                         OrderNumber = c.Int(nullable: false),
-                        Project_ProjectId = c.Int(),
+                        Project_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.TileId)
-                .ForeignKey("dbo.Projects", t => t.Project_ProjectId)
-                .Index(t => t.Project_ProjectId);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Projects", t => t.Project_Id)
+                .Index(t => t.Project_Id);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Tiles", "Project_ProjectId", "dbo.Projects");
-            DropIndex("dbo.Tiles", new[] { "Project_ProjectId" });
+            DropForeignKey("dbo.Tiles", "Project_Id", "dbo.Projects");
+            DropIndex("dbo.Tiles", new[] { "Project_Id" });
             DropTable("dbo.Tiles");
             DropTable("dbo.Projects");
         }

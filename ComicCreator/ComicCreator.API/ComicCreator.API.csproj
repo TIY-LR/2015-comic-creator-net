@@ -186,25 +186,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201512050419045_Initial-Create.cs" />
-    <Compile Include="Migrations\201512050419045_Initial-Create.Designer.cs">
-      <DependentUpon>201512050419045_Initial-Create.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512051631039_NewProject.cs" />
-    <Compile Include="Migrations\201512051631039_NewProject.Designer.cs">
-      <DependentUpon>201512051631039_NewProject.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512051704524_ProjectAddedAuthor.cs" />
-    <Compile Include="Migrations\201512051704524_ProjectAddedAuthor.Designer.cs">
-      <DependentUpon>201512051704524_ProjectAddedAuthor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512051735126_TileAddCaptionAddURL.cs" />
-    <Compile Include="Migrations\201512051735126_TileAddCaptionAddURL.Designer.cs">
-      <DependentUpon>201512051735126_TileAddCaptionAddURL.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512052230219_AddCategoryandCover.cs" />
-    <Compile Include="Migrations\201512052230219_AddCategoryandCover.Designer.cs">
-      <DependentUpon>201512052230219_AddCategoryandCover.cs</DependentUpon>
+    <Compile Include="Migrations\201512060025093_Initial-Create.cs" />
+    <Compile Include="Migrations\201512060025093_Initial-Create.Designer.cs">
+      <DependentUpon>201512060025093_Initial-Create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ComicCreatorDB.cs" />
@@ -272,29 +256,17 @@
     <Content Include="Views\TilesMVC\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512050419045_Initial-Create.resx">
-      <DependentUpon>201512050419045_Initial-Create.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512051631039_NewProject.resx">
-      <DependentUpon>201512051631039_NewProject.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512051704524_ProjectAddedAuthor.resx">
-      <DependentUpon>201512051704524_ProjectAddedAuthor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512051735126_TileAddCaptionAddURL.resx">
-      <DependentUpon>201512051735126_TileAddCaptionAddURL.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512052230219_AddCategoryandCover.resx">
-      <DependentUpon>201512052230219_AddCategoryandCover.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201512060025093_Initial-Create.resx">
+      <DependentUpon>201512060025093_Initial-Create.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

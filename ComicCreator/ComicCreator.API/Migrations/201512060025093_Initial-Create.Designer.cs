@@ -13,7 +13,7 @@ namespace ComicCreator.API.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201512050419045_Initial-Create"; }
+            get { return "201512060025093_Initial-Create"; }
         }
         
         string IMigrationMetadata.Source
