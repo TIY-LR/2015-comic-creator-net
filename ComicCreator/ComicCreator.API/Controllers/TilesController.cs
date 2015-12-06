@@ -19,7 +19,7 @@ namespace ComicCreator.API.Controllers
         // GET: api/Tiles
         public IHttpActionResult GetTiles()
         {
-            return Ok(db.Tiles.Include("project").Select( t=> new GetTileInfoVM(t));
+            return Ok(db.Tiles.Include("Project").Select( t=> new GetTileInfoVM(t)));
         }
 
         //// GET: api/Tiles

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -24,12 +25,14 @@ namespace ComicCreator.API.Models
     public class Tile
     {
         public int Id { get; set; }
+
         public string Caption { get; set; }
         public string URL { get; set; }
         public float PositionX = 0.0f;
         public float PositionY = 0.0f;
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
+        [Required]
         public virtual Project Project { get; set; }
         public int OrderNumber { get; set; }
     }

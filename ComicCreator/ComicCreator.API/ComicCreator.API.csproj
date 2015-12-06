@@ -177,6 +177,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Migrations\201512061840268_CascadeDeleteProject.cs" />
+    <Compile Include="Migrations\201512061840268_CascadeDeleteProject.Designer.cs">
+      <DependentUpon>201512061840268_CascadeDeleteProject.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\CreateTitleVM.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -267,6 +271,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201512060025093_Initial-Create.resx">
       <DependentUpon>201512060025093_Initial-Create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512061840268_CascadeDeleteProject.resx">
+      <DependentUpon>201512061840268_CascadeDeleteProject.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
