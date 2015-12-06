@@ -43,7 +43,7 @@ namespace ComicCreator.API.Controllers
                 tiles = project.tiles.Select(x => x.Id).ToList()
 
             };
-            return Ok(project);
+            return Ok(model);
         }
 
         // PUT: api/Projects/5
