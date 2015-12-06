@@ -27,7 +27,7 @@ namespace ComicCreator.API.Controllers
         [Route("api/tiles/{projectId}")]
         public IQueryable<Tile> GetTiles(int projectId)
         {
-            return db.Tiles.Where(t=> t.Project.ProjectId== projectId);
+            return db.Tiles.Where(t=> t.Project.Id== projectId);
         }
 
         // GET: api/Tiles/5
@@ -52,7 +52,7 @@ namespace ComicCreator.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != tile.TileId)
+            if (id != tile.Id)
             {
                 return BadRequest();
             }
@@ -92,7 +92,7 @@ namespace ComicCreator.API.Controllers
             db.Tiles.Add(tile);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = tile.TileId }, tile);
+            return CreatedAtRoute("DefaultApi", new { id = tile.Id }, tile);
         }
 
         // DELETE: api/Tiles/5
@@ -122,7 +122,7 @@ namespace ComicCreator.API.Controllers
 
         private bool TileExists(int id)
         {
-            return db.Tiles.Count(e => e.TileId == id) > 0;
+            return db.Tiles.Count(e => e.Id == id) > 0;
         }
     }
 }

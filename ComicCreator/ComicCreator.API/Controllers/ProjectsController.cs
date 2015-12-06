@@ -26,7 +26,7 @@ namespace ComicCreator.API.Controllers
         [ResponseType(typeof(Project))]
         public IHttpActionResult GetProject(int id)
         {
-            Project project = db.Projects.Include("Tiles").Where(x => x.ProjectId == id).FirstOrDefault(); 
+            Project project = db.Projects.Include("Tiles").Where(x => x.Id == id).FirstOrDefault(); 
             if (project == null)
             {
                 return NotFound();
@@ -44,7 +44,7 @@ namespace ComicCreator.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != project.ProjectId)
+            if (id != project.Id)
             {
                 return BadRequest();
             }
@@ -88,7 +88,7 @@ namespace ComicCreator.API.Controllers
 
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = project.ProjectId }, project);
+            return CreatedAtRoute("DefaultApi", new { id = project.Id }, project);
         }
 
         // DELETE: api/Projects/5
@@ -118,7 +118,7 @@ namespace ComicCreator.API.Controllers
 
         private bool ProjectExists(int id)
         {
-            return db.Projects.Count(e => e.ProjectId == id) > 0;
+            return db.Projects.Count(e => e.Id == id) > 0;
         }
     }
 }
