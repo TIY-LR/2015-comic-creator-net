@@ -17,9 +17,9 @@ namespace ComicCreator.API.Controllers
         private ComicCreatorDB db = new ComicCreatorDB();
 
         // GET: api/Tiles
-        public IQueryable<Tile> GetTiles()
+        public IHttpActionResult GetTiles()
         {
-            return db.Tiles;
+            return Ok(db.Tiles.ToList());
         }
 
             //// GET: api/Tiles

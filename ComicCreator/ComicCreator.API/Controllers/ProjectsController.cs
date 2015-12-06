@@ -32,6 +32,17 @@ namespace ComicCreator.API.Controllers
                 return NotFound();
             }
 
+            var model = new GetProjectInfoVM()
+            {
+                Id = project.Id,
+                Author = project.Author,
+                Category = project.Category,
+                Cover = project.Cover,
+                DateCreated = project.DateCreated,
+                DateUpdated = project.DateUpdated,
+                tiles = project.tiles.Select(x => x.Id).ToList()
+
+            };
             return Ok(project);
         }
 

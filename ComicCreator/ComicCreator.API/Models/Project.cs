@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -33,4 +34,20 @@ namespace ComicCreator.API.Models
         public int OrderNumber { get; set; }
     }
 
+    [JsonObject("Project")]
+    public class GetProjectInfoVM
+    {
+        public GetProjectInfoVM()
+        {
+            tiles = new List<int>();
+        }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Cover { get; set; }
+        public string Category { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
+        public virtual ICollection<int> tiles { get; set; }
+    }
 }
